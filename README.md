@@ -1,1 +1,0 @@
-# test_task_backend_internship
