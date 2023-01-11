@@ -1,4 +1,4 @@
-# Test task for backend internship - Chat Server
+# Chat Server
 
 
 #### About the project:
