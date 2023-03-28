@@ -1,7 +1,6 @@
 package com.vladimirbabin.get_ready_for_interview.task2.backend_internship_task.entity;
 
 
-
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
@@ -12,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "chats")
 @JsonIdentityInfo(
+        scope = Chat.class,
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
 public class Chat {
@@ -21,7 +21,7 @@ public class Chat {
     private int id;
 
     @Column(name = "chat_name")
-    private String chatName;
+    private String name;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -43,8 +43,8 @@ public class Chat {
     public Chat() {
     }
 
-    public Chat(String chatName) {
-        this.chatName = chatName;
+    public Chat(String name) {
+        this.name = name;
     }
 
     public void addUserToChat(User user) {
@@ -62,6 +62,15 @@ public class Chat {
         message.setChat(this);
     }
 
+    @Override
+    public String toString() {
+        return "Chat{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
@@ -70,12 +79,12 @@ public class Chat {
         this.id = id;
     }
 
-    public String getChatName() {
-        return chatName;
+    public String getName() {
+        return name;
     }
 
-    public void setChatName(String chatName) {
-        this.chatName = chatName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDateTime getCreatedAt() {

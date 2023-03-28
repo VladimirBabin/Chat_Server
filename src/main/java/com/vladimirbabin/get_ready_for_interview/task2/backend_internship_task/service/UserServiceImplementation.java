@@ -25,9 +25,9 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User findById(int id) {
         User user = null;
-        Optional<User> userOptinal = userRepository.findById(id);
-        if (userOptinal.isPresent()) {
-            user = userOptinal.get();
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            user = userOptional.get();
         } else {
             throw new NoSuchEntityException("There is no user with id = " + id);
         }
@@ -42,6 +42,10 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void deleteById(int id) {
-        userRepository.deleteById(id);
+        try {
+            userRepository.deleteById(id);
+        } catch(Exception e) {
+            throw new NoSuchEntityException("There is no user with id = " + id);
+        }
     }
 }

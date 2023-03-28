@@ -50,4 +50,9 @@ public class ChatServiceImplementation implements ChatService {
         }
         return chat;
     }
+
+    @Override
+    public Chat findByName(String name) {
+        return chatRepository.findByName(name);
+    }
 }
