@@ -87,7 +87,7 @@ public class RESTController {
     public int saveNewChatBetweenUsers(@RequestBody Chat chat) {
 
         if (chat == null) {
-            throw new NoSuchEntityException("Chat doesn't exist");
+            throw new NoSuchEntityException("Chat number" + chat.getId() + "    doesn't exist");
         }
         if (chat.getCreatedAt() == null) {
             chat.setCreatedAt(LocalDateTime.now());
@@ -102,7 +102,7 @@ public class RESTController {
     public int updateChatBetweenUsers(@RequestBody Chat chat) {
 
         if (chat == null) {
-            throw new NoSuchEntityException("Chat doesn't exist");
+            throw new NoSuchEntityException("Chat number" + chat.getId() + "    doesn't exist");
         }
 
         if (chat.getId() == 0) {
@@ -129,20 +129,12 @@ public class RESTController {
         return "Chat with ID = " + chatId +" was deleted";
     }
 
-    @GetMapping("messages/{messageId}")
-    public Message getMessage(@PathVariable int messageId) {
-        Message message = messageService.findById(messageId);
-        if (message == null) {
-            throw new NoSuchEntityException("There is no message with id = " + messageId);
-        }
-        return message;
-    }
 
     @PostMapping("/messages")
     public int addNewMessageFromUserToChat(@RequestBody Message message) {
         Chat chat = chatService.findById(message.getChat().getId());
         if (chat == null) {
-            throw new NoSuchEntityException("Chat doesn't exist");
+            throw new NoSuchEntityException("Chat number" + message.getChat().getId() + "doesn't exist");
         }
         if (message.getText() == null || message.getText().isBlank()) {
             throw new NoTextMessageEntered("No text message was entered");
@@ -173,7 +165,7 @@ public class RESTController {
     @PostMapping("messages/get_by_chat")
     public List<Message> getAllMessagesOfChat(@RequestBody Chat chat) {
         if (chat == null) {
-            throw new NoSuchEntityException("Chat doesn't exist");
+            throw new NoSuchEntityException("Chat number" + chat.getId() + " doesn't exist");
         }
         List<Message> listOfMessages = messageService.findAllByChat(chat);
         if (listOfMessages == null || listOfMessages.isEmpty()) {
@@ -189,6 +181,13 @@ public class RESTController {
         return "Message with ID = " + messageId +" was deleted";
     }
 
-
+    @GetMapping("messages/{messageId}")
+    public Message getMessage(@PathVariable int messageId) {
+        Message message = messageService.findById(messageId);
+        if (message == null) {
+            throw new NoSuchEntityException("There is no message with id = " + messageId);
+        }
+        return message;
+    }
 
 }

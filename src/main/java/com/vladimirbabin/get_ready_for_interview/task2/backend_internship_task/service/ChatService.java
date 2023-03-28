@@ -14,6 +14,4 @@ public interface ChatService {
     void deleteById(int id);
 
     Chat findById(int chatId);
-
-    Chat findByName(String name);
 }

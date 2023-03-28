@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @JsonIdentityInfo(
-        scope = User.class,
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
 public class User {
@@ -25,14 +24,6 @@ public class User {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                '}';
-    }
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(

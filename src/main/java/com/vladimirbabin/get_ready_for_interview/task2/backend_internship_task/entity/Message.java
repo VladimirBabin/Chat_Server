@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "messages")
 @JsonIdentityInfo(
-        scope = Message.class,
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
 public class Message {
@@ -85,13 +84,4 @@ public class Message {
     }
 
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", chat=" + chat +
-                ", author=" + author +
-                ", text='" + text + '\'' +
-                '}';
-    }
 }

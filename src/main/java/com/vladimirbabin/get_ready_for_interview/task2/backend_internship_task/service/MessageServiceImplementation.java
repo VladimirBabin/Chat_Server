@@ -3,7 +3,6 @@ package com.vladimirbabin.get_ready_for_interview.task2.backend_internship_task.
 import com.vladimirbabin.get_ready_for_interview.task2.backend_internship_task.dao.MessageRepository;
 import com.vladimirbabin.get_ready_for_interview.task2.backend_internship_task.entity.Chat;
 import com.vladimirbabin.get_ready_for_interview.task2.backend_internship_task.entity.Message;
-import com.vladimirbabin.get_ready_for_interview.task2.backend_internship_task.exception_handling.NoSuchEntityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,9 +38,7 @@ public class MessageServiceImplementation implements MessageService {
         Optional<Message> optional = messageRepository.findById(messageId);
         if (optional.isPresent()) {
             message = optional.get();
-        } else {
-        throw new NoSuchEntityException("There is no message with id = " + messageId);
-    }
+        }
 
         return message;
     }
